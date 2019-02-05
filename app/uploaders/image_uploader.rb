@@ -6,6 +6,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   def size_range
     1..10.megabytes
   end
+
+  def extension_white_list
+      ['jpg', 'jpeg', 'png']
+  end
+
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
