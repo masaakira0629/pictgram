@@ -4,14 +4,14 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = current_user.comments.new(description: params[:comment][:description])
+    @comment = current_user.comments.new(comment_params)
     @comment.topic_id = params[:comment][:topic_id]
 
     if @comment.save
       redirect_to comments_path success: 'コメントしました'
     else
       flash.now[:danger] = 'コメントに失敗しました'
-      render action :new and return
+      render action :new
     end
   end
 

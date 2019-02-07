@@ -3,11 +3,14 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
          <%= form_for @comment do |f| %>
-         <%= f.hidden_field "authenticity_token" form_authenticity_token %>
          <div class="form-group">
-            <%= f.lebel :description %>
-            <%= f.text_area :description, class: 'form-control' %>
+            <%= f.label :comment %>
+            <%= f.text_area :comment, class: 'form-control' %>
           </div>
+
+
+
+          <%= f.submit '投稿', class: 'btn btn-black btn-block' %>
        　<% end %>
       </div>
     </div>

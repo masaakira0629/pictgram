@@ -17,11 +17,10 @@
             <% end %>
             <%= topic.favorites.count %>
 
-            <% if !topic.comment_users.include?(current_user) %>
-             <%= link_to comments_path(topic_id: topic.id), method: :post do %>
+             <%= link_to new_comment_path(topic_id: topic.id), method: :get do %>
              <%= image_tag 'icons/comment.png', id: 'topic-index-icon' %>
             <% end %>
-            <% end %>
+
             <p class="topic-text">
              <%= topic.description %>
             </p>
@@ -29,7 +28,7 @@
             <h4 class="comment-title">コメント</h4>
             <p class="comment-text">
               <%= topic.comments.each do |comment| %>
-              <%= comment.description　%>
+              <%= topic.description　%>
             <% end %>
             </p>
 
