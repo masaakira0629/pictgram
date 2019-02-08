@@ -1,22 +1,24 @@
 class CommentsController < ApplicationController
+
   def new
-    @comment =Comment.new
+    @comment = Comment.new
+ end
+  def index
+    @comment = Comment.all.includes(:topic, :comments,)
   end
 
   def create
-    @comment = current_user.comments.new(comment_params)
-    @comment.topic_id = params[:comment][:topic_id]
+    comment = Comment.create(create_params)
 
-    if @comment.save
-      redirect_to comments_path success: 'コメントしました'
+    if comment.persisted?
+      redirect_to topics_path, success: 'コメントの投稿に成功しました'
     else
-      flash.now[:danger] = 'コメントに失敗しました'
-      render action :new
+    　redirect_to new_topic_comment_path, danger:'コメントに失敗しました'
     end
   end
 
   private
-   def comment_params
-     params.require(:comment).permit(:image, :description)
+   def create_params
+     params.require(:comment).permit(:content).merge(user_id: current_user.id, topic_id: params[:topic_id])
    end
  end
